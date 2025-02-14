@@ -1,0 +1,5 @@
+# Fichier avec le nom des élèves
+authors.txt
+
+#Fichier avec les variables d'environnement
+.env

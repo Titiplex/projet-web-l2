@@ -2,7 +2,7 @@
 
 namespace model;
 
-final class Ad extends Model implements DbInterface {
+final class Ad extends Model {
     private string $name {
         get => $this->name;
         set(string $value) => $this->name = $value;
@@ -27,28 +27,5 @@ final class Ad extends Model implements DbInterface {
         $this->price = $price;
     }
 
-    function selectById(int $id) : Ad
-    {
-        // TODO: Implement selectById() method.
-    }
 
-    function selectAll() : array
-    {
-        // TODO: Implement selectAll() method.
-    }
-
-    function insert(Ad|Model $data) : bool
-    {
-        // TODO: Implement insert() method.
-    }
-
-    function update(Ad|Model $data): bool
-    {
-        // TODO: Implement update() method.
-    }
-
-    function delete(int $id) : bool
-    {
-        // TODO: Implement delete() method.
-    }
 }

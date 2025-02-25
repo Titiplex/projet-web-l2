@@ -2,7 +2,7 @@
 
 namespace model;
 
-interface DbInterface {
+interface DaoInterface {
 
     /**
      * @param int $id

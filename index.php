@@ -12,18 +12,7 @@
 <?php include('templates/html/header.php'); ?>
 <div class="w3-container w3-row-padding">
     <main>
-        <?php
-        $TABPAGES = array(
-            "home" => "home",
-            "login" => "login",
-            "register" => "register"
-        );
-        if (isset($_GET['page']) && array_key_exists($_GET['page'], $TABPAGES)) {
-            include("templates/html/" . $TABPAGES[$_GET['page']] . ".php");
-        } else {
-            include('templates/html/home.php');
-        }
-        ?>
+
     </main>
 </div>
 <?php include('templates/html/footer.php'); ?>

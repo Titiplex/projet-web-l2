@@ -23,6 +23,7 @@ Quand on clique sur une annonce, ça envoie vers une page dynamique qui présent
 
 Il y a une fiche contact (objet et message) pour les administrateurs pour signaler un problème, celà envoie un mail aux administrateurs.
 
-Pour les utilisateurs, il existe une page de FAQ, une page pour voir son compte et ses annonces (après avoir login).
+Pour les utilisateurs, il existe une page pour voir son compte et une pour ses annonces (après avoir login).
 
 Pour les administrateurs, ils ont accès à un tableau de bord dédié qui leur permet de gérer les utilisateurs (suppression, modifier) et gérer les annonces (modifier, supprimer). Les administrateurs peuvent modifier, ajouter ou supprimer les questions de la FAQ.
+Les administrateurs ont aussi accès à une page de faq.

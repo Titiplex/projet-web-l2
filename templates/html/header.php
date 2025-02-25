@@ -1,12 +1,30 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LeBonTroqueur</title>
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <link rel="stylesheet" href="https://www.w3schools.com/lib/w3-theme-teal.css">
+    <link rel="stylesheet"  href="<?php echo $racine."templates/css/style.css"; ?>">
+</head>
+<body style="background-color: #F5F5F5;">
+
 <header class="w3-theme-d2 w3-cell-row">
     <div class="w3-cell w3-padding w3-cell-middle three-quarters"><h1><a class="clean-ref" href="https://pedago.univ-avignon.fr/~uapv2401251">LeBonTroqueur</a>
         </h1></div>
     <div class="w3-cell w3-padding w3-cell-middle one-quarter align-right">
         <?php if (isset($_SESSION['user_id'])): ?>
-            <a href="https://pedago.univ-avignon.fr/~uapv2401251/?page=logout" class="w3-button w3-red">Logout</a>
+            <a href="<?php echo $racine."control/logout.php"?>" class="w3-button w3-red">Logout</a>
         <?php else: ?>
-            <a href="https://pedago.univ-avignon.fr/~uapv2401251/?page=login" class="w3-button w3-theme">Login</a>
-            <a href="https://pedago.univ-avignon.fr/~uapv2401251/?page=register" class="w3-button w3-theme">Sign Up</a>
+            <a href="<?php echo $racine."login/control/login.php"?>" class="w3-button w3-theme">Login</a>
+            <a href="<?php echo $racine."register/control/register.php"?>" class="w3-button w3-theme">Sign Up</a>
         <?php endif; ?>
     </div>
 </header>
+
+<div class="w3-container w3-row-padding">
+    <main>
+        <div class="w3-center">
+            <h2><?php echo $titre; ?></h2>
+        </div>

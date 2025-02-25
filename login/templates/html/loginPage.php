@@ -1,6 +1,3 @@
-<?php if (isset($_SESSION['user_id'])) {
-    header('Location: https://https://pedago.univ-avignon.fr/~uapv2401251/');
-} ?>
 <div class="w3-center">
     <h2>Login</h2>
 </div>

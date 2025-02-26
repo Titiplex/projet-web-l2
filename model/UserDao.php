@@ -1,32 +1,132 @@
 <?php
-
 namespace model;
+
+require_once __DIR__ . '/DaoInterface.php';
+require_once __DIR__ . '/DbConnect.php';
+require_once __DIR__ . '/RoleDao.php';
+require_once __DIR__ . '/UserDao.php';
+require_once __DIR__ . '/User.php';
+require_once __DIR__ . '/Model.php';
+
+use PDO;
+use PDOException;
 
 class UserDao implements DaoInterface
 {
 
-    function selectById(int $id): Model
+    public function selectById(int $id): ?Model
     {
-        // TODO: Implement selectById() method.
+        try {
+            $stmt = DbConnect::getDb()->prepare("SELECT * FROM \"user\" WHERE id_user = ?");
+            $stmt->bindValue(1, $id);
+            $stmt->execute();
+            $row = $stmt->fetch(PDO::FETCH_ASSOC);
+            $role_id = $row['id_role'];
+
+            $role = (new RoleDao())->selectById($role_id);
+
+            return $row ? new User($row['id'], $row['mail'], $row['tel'], $row['nom'], $row['prenom'], $row['mdp'], $role) : null;
+        } catch (PDOException $e) {
+            echo $e->getMessage();
+        }
+        return null;
     }
 
-    function selectAll(): array
+    public function selectAll(): array
     {
-        // TODO: Implement selectAll() method.
+        $users = [];
+        try {
+            $stmt = DbConnect::getDb()->prepare("SELECT * FROM \"user\"");
+            $stmt->execute();
+            while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+                $role_id = $row['id_role'];
+                $role = (new RoleDao())->selectById($role_id);
+                $users[] = new User($row['id'], $row['mail'], $role['tel'], $row['nom'], $row['prenom'], $row['mdp'], $role);
+            }
+
+            return $users;
+        } catch (PDOException $e) {
+            echo $e->getMessage();
+        }
+        return $users;
     }
 
-    function insert(Model $data): bool
+    public function insert(Model $data): bool
     {
-        // TODO: Implement insert() method.
+        $conn = DbConnect::getDb();
+        try {
+            $conn->beginTransaction();
+            $stmt = $conn->prepare("INSERT INTO \"user\" (mail, nom, prenom, tel, mdp, id_role) VALUES (?, ?, ?, ?, ?, ?)");
+            $stmt->bindValue(1, $data->email);
+            $stmt->bindValue(2, $data->name);
+            $stmt->bindValue(3, $data->firstname);
+            $stmt->bindValue(4, $data->tel);
+            $stmt->bindValue(5, $data->password);
+            $stmt->bindValue(6, $data->role->id);
+            $stmt->execute();
+            $conn->commit();
+            return true;
+        } catch (PDOException $e) {
+            $conn->rollBack();
+            echo $e->getMessage();
+        }
+        return false;
     }
 
-    function update(Model $data): bool
+    public function update(Model $data): bool
     {
-        // TODO: Implement update() method.
+        $conn = DbConnect::getDb();
+        try {
+            $conn->beginTransaction();
+            $stmt = $conn->prepare("UPDATE \"user\" SET mail = ?, nom = ?, prenom = ?, tel = ?, mdp = ?, id_role = ? WHERE id_user = ?");
+            $stmt->bindValue(1, $data->email);
+            $stmt->bindValue(2, $data->name);
+            $stmt->bindValue(3, $data->firstname);
+            $stmt->bindValue(4, $data->tel);
+            $stmt->bindValue(5, $data->password);
+            $stmt->bindValue(6, $data->role->id);
+            $stmt->bindValue(7, $data->id);
+            $stmt->execute();
+            $conn->commit();
+            return true;
+        } catch (PDOException $e) {
+            $conn->rollBack();
+            echo $e->getMessage();
+        }
+        return false;
     }
 
-    function delete(int $id): bool
+    public function delete(int $id): bool
     {
-        // TODO: Implement delete() method.
+        $conn = DbConnect::getDb();
+        try {
+            $conn->beginTransaction();
+            $stmt = $conn->prepare("DELETE FROM \"user\" WHERE id_user = ?");
+            $stmt->bindValue(1, $id);
+            $stmt->execute();
+            $conn->commit();
+            return true;
+        } catch (PDOException $e) {
+            $conn->rollBack();
+            echo $e->getMessage();
+        }
+        return false;
+    }
+
+    public function getByEmail(string $email) : ?User {
+        try {
+            $stmt = DbConnect::getDb()->prepare("SELECT * FROM \"user\" WHERE mail = ?");
+            $stmt->bindValue(1, $email);
+            $stmt->execute();
+            $row = $stmt->fetch(PDO::FETCH_ASSOC);
+            $role_id = $row['id_role'];
+
+            $role = (new RoleDao())->selectById($role_id);
+
+            return $row ? new User($row['id_user'], $row['mail'], $row['tel'], $row['nom'], $row['prenom'], $row['mdp'], $role) : null;
+        } catch (PDOException $e) {
+            echo $e->getMessage();
+        }
+        return null;
     }
 }

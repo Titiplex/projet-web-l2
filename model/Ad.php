@@ -1,7 +1,6 @@
 <?php
 
 namespace model;
-
 final class Ad extends Model {
     private string $name {
         get => $this->name;

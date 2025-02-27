@@ -28,7 +28,7 @@
                 <input type="password" name="password-confirmation" placeholder="Password confirmation" required
                        id="password-confirmation" class="w3-input">
             </label>
-            <button type="submit" class="w3-btn w3-round w3-theme-dark w3-margin" name="register" id="register">Register</button>
+            <button type="submit" class="w3-btn w3-round w3-theme-dark w3-margin" name="register" id="register">Modify</button>
         </form>
     </div>
 </div>

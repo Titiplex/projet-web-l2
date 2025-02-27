@@ -1,8 +1,14 @@
 <div class="w3-container w3-row-padding">
     <div class="w3-twothird">
         <div class="w3-card w3-padding w3-round w3-margin">
-            <h3>Title of the ad</h3>
-            <sub>id: 0000</sub>
+            <div>
+                <h3>Title of the ad</h3>
+                <sub>id: 0000</sub>
+            </div>
+            <div>
+                <a class="w3-button w3-red w3-margin">Delete</a>
+                <a class="w3-button w3-theme w3-margin" href="<?php echo $racine."adForm/control/adForm.php" ?>">Update</a>
+            </div>
         </div>
         <div class="w3-card w3-padding w3-round w3-margin">
             <div>
@@ -37,6 +43,6 @@
                     <td>12345678</td>
                 </tr>
             </table>
-        </div>
+        </div
     </div>
 </div>

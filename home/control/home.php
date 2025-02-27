@@ -26,7 +26,7 @@
         );
         include($folder . 'templates/html/homePageConnected.php');
         foreach ($ads as $ad) {
-            include($folder . 'templates/html/adCard.php');
+            include($racine . 'templates/html/adCard.php');
         }
         echo "</div></div>";
     } else {

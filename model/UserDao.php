@@ -25,7 +25,7 @@ class UserDao implements DaoInterface
 
             $role = (new RoleDao())->selectById($role_id);
 
-            return $row ? new User($row['id'], $row['mail'], $row['tel'], $row['nom'], $row['prenom'], $row['mdp'], $role) : null;
+            return $row ? new User($row['id_user'], $row['mail'], $row['tel'], $row['nom'], $row['prenom'], $row['mdp'], $role) : null;
         } catch (PDOException $e) {
             echo $e->getMessage();
         }

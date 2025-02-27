@@ -1,4 +1,4 @@
-<div class="parent-middle">
+<div class="parent-middle w3-container">
     <div class="w3-card w3-margin w3-center w3-round-large w3-padding half">
         <form method="POST" action="">
             <label for="email">

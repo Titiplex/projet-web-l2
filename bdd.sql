@@ -16,8 +16,10 @@ CREATE TABLE IF NOT EXISTS "user" (
 
 CREATE TABLE IF NOT EXISTS Annonce (
     ID_Annonce SERIAL PRIMARY KEY,
+    title VARCHAR(255) NOT NULL ,
     description TEXT NOT NULL,
     localisation VARCHAR(255) NOT NULL,
+    price int NOT NULL ,
     ID_User INT NOT NULL,
     FOREIGN KEY (ID_User) REFERENCES "user"(ID_User) ON DELETE CASCADE
 );

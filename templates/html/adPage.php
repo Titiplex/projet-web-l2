@@ -7,7 +7,7 @@
             </div>
             <div>
                 <a class="w3-button w3-red w3-margin">Delete</a>
-                <a class="w3-button w3-theme w3-margin" href="<?php echo $racine."adForm/control/adForm.php" ?>">Update</a>
+                <a class="w3-button w3-theme w3-margin" href="<?php echo $racine."control/adForm.php" ?>">Update</a>
             </div>
         </div>
         <div class="w3-card w3-padding w3-round w3-margin">

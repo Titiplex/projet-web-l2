@@ -1,7 +1,6 @@
 <?php
     session_start();
-    $racine = '../../';
-    $folder = '../';
+    $racine = '../';
     $titre = "Welcome at LeBonTroqueur";
     include($racine . 'templates/html/header.php');
 
@@ -24,12 +23,12 @@
                 $racine."images/ads/img.png"
             ]
         );
-        include($folder . 'templates/html/homePageConnected.php');
+        include($racine . 'templates/html/homePageConnected.php');
         foreach ($ads as $ad) {
             include($racine . 'templates/html/adCard.php');
         }
         echo "</div></div>";
     } else {
-        include($folder . 'templates/html/homePageNotConnected.php');
+        include($racine . 'templates/html/homePageNotConnected.php');
     }
     include($racine . 'templates/html/footer.php');

@@ -2,14 +2,13 @@
 
 namespace model;
 session_start();
-$racine = '../../';
+$racine = '../';
 require_once $racine."model/UserDao.php";
-$folder = '../';
 $titre = "Log in LeBonTroqueur";
 
 if (!isset($_SESSION["user_id"])){
     include($racine . 'templates/html/header.php');
-    include($folder . 'templates/html/loginPage.php');
+    include($racine . 'templates/html/loginPage.php');
     include($racine . 'templates/html/footer.php');
 
     if (isset($_POST['login'])){

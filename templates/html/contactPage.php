@@ -18,6 +18,7 @@
             <label> Message
                 <textarea name="message" placeholder="Message" required class="w3-input"></textarea>
             </label>
+            <button type="submit" class="w3-btn w3-round w3-theme-dark w3-margin" name="send" id="send">Send</button>
         </form>
     </div>
 </div>

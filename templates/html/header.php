@@ -18,11 +18,11 @@
             if ($_SESSION['role_id'] == 1):?>
             <a href="<?php echo $racine."admin/index.php" ?>" class="w3-button w3-yellow">Admin</a>
             <?php endif;?>
-            <a href="<?php echo $racine."dashboard/control/dashboard.php" ?>" class="w3-button w3-theme">Dashboard</a>
+            <a href="<?php echo $racine."control/dashboard.php" ?>" class="w3-button w3-theme">Dashboard</a>
             <a href="<?php echo $racine."control/logout.php"?>" class="w3-button w3-red">Logout</a>
         <?php else: ?>
-            <a href="<?php echo $racine."login/control/login.php"?>" class="w3-button w3-theme">Login</a>
-            <a href="<?php echo $racine."register/control/register.php"?>" class="w3-button w3-theme">Sign Up</a>
+            <a href="<?php echo $racine."control/login.php"?>" class="w3-button w3-theme">Login</a>
+            <a href="<?php echo $racine."control/register.php"?>" class="w3-button w3-theme">Sign Up</a>
         <?php endif; ?>
     </div>
 </header>

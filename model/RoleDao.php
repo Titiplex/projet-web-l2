@@ -3,12 +3,15 @@
 namespace model;
 
 require_once __DIR__."/Role.php";
+require_once __DIR__."/Model.php";
+require_once __DIR__."/DaoInterface.php";
+require_once __DIR__. "/DbConnect.php";
 
 use PDO;
 
 class RoleDao implements DaoInterface
 {
-    function selectById(int $id): ?Model
+    function selectById(int $id): ?Role
     {
         $stmt = DbConnect::getDb()->prepare("SELECT * FROM \"role\" WHERE id_role = ?");
         $stmt->bindValue(1, $id);

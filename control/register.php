@@ -22,7 +22,7 @@ if (!isset($_SESSION["user_id"])){
 
         $user_dao = new \model\UserDao();
 
-        if ($user_dao->getByEmail($email) != null && $user_dao->insert(new model\User(0,  $email, $tel, $nom, $prenom, password_hash($password, PASSWORD_DEFAULT), new \model\Role(2, "User")))) {
+        if ($user_dao->getByEmail($email) == null && $user_dao->insert(new model\User(0,  $email, $tel, $nom, $prenom, password_hash($password, PASSWORD_DEFAULT), new \model\Role(2, "User")))) {
             header("Location:" . $racine . "control/login.php");
         } else {
             $errorMessage = "Error during signup";

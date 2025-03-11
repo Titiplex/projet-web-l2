@@ -1,30 +1,32 @@
 <?php
 
 namespace model;
-final class Ad extends Model {
-    private string $name {
-        get => $this->name;
-        set(string $value) => $this->name = $value;
-    }
-    private string $imageData {
-        get => $this->imageData;
-        set(string $value) => $this->imageData = $value;
-    }
-    private string $description {
-        get => $this->description;
-        set(string $value) => $this->description = $value;
-    }
-    private int $price {
-        get => $this->price;
-        set(int $value) => $this->price = $value;
-    }
-    public function __construct(int $id, string $name, string $imageData, string $description, int $price) {
+
+require_once __DIR__ . "/Model.php";
+
+use Exception;
+
+/**
+ * @property string title
+ * @property string description
+ * @property string localisation
+ * @property int price
+ * @property int id_user
+ */
+final class Ad extends Model
+{
+    private string $title;
+    private string $description;
+    private string $localisation;
+    private int $price;
+    private int $id_user;
+    public function __construct(int $id, string $title, string $localisation, string $description, int $price, $id_user) {
         parent::__construct($id);
-        $this->name = $name;
-        $this->imageData = $imageData;
+        $this->title = $title;
         $this->description = $description;
         $this->price = $price;
+        $this->id_user = $id_user;
+        $this->localisation = $localisation;
     }
-
 
 }

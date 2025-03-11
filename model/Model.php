@@ -2,20 +2,36 @@
 
 namespace model;
 
+use Exception;
+
+/**
+ * @property int id
+ */
 class Model {
-    public int $id;
+    private int $id;
     protected function __construct(int $id) {
         $this->id = $id;
     }
 
-    public function getId(): int
-    {
-        return $this->id;
+    /**
+     * @throws Exception
+     */
+    public function __get($name) {
+        if (property_exists($this, $name)) {
+            return $this->$name;
+        }
+        throw new Exception("Property '$name' does not exist");
     }
 
-    public function setId(int $id): void
-    {
-        $this->id = $id;
+    /**
+     * @throws Exception
+     */
+    public function __set($name, $value) {
+        if (property_exists($this, $name)) {
+            $this->$name = $value;
+        } else {
+            throw new Exception("Property '$name' does not exist");
+        }
     }
 
 }

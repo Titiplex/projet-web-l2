@@ -1,20 +1,13 @@
 <?php
 namespace model;
 
-require_once __DIR__ . '/DaoInterface.php';
-require_once __DIR__ . '/DbConnect.php';
-require_once __DIR__ . '/RoleDao.php';
-require_once __DIR__ . '/UserDao.php';
-require_once __DIR__ . '/User.php';
-require_once __DIR__ . '/Model.php';
-
 use PDO;
 use PDOException;
 
 class UserDao implements DaoInterface
 {
 
-    public function selectById(int $id): ?Model
+    public function selectById(int $id): ?User
     {
         try {
             $stmt = DbConnect::getDb()->prepare("SELECT * FROM \"user\" WHERE id_user = ?");
@@ -41,7 +34,7 @@ class UserDao implements DaoInterface
             while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
                 $role_id = $row['id_role'];
                 $role = (new RoleDao())->selectById($role_id);
-                $users[] = new User($row['id'], $row['mail'], $role['tel'], $row['nom'], $row['prenom'], $row['mdp'], $role);
+                $users[] = new User($row['id'], $row['mail'], $row['tel'], $row['nom'], $row['prenom'], $row['mdp'], $role);
             }
 
             return $users;
@@ -51,12 +44,12 @@ class UserDao implements DaoInterface
         return $users;
     }
 
-    public function insert(Model $data): bool
+    public function insert(User|Model $data): bool
     {
         $conn = DbConnect::getDb();
         try {
             $conn->beginTransaction();
-            $stmt = $conn->prepare("INSERT INTO \"user\" (mail, nom, prenom, tel, mdp, id_role) VALUES (?, ?, ?, ?, ?, ?)");
+            $stmt = $conn->prepare("INSERT INTO \"user\" (mail, nom, prenom, tel, mdp, id_role) VALUES (?, ?, ?, ?, ?, ?) RETURNING id_user");
             $stmt->bindValue(1, $data->email);
             $stmt->bindValue(2, $data->name);
             $stmt->bindValue(3, $data->firstname);
@@ -64,6 +57,7 @@ class UserDao implements DaoInterface
             $stmt->bindValue(5, $data->password);
             $stmt->bindValue(6, $data->role->id);
             $stmt->execute();
+            $data->id = $stmt->fetchColumn();
             $conn->commit();
             return true;
         } catch (PDOException $e) {
@@ -73,7 +67,7 @@ class UserDao implements DaoInterface
         return false;
     }
 
-    public function update(Model $data): bool
+    public function update(User|Model $data): bool
     {
         $conn = DbConnect::getDb();
         try {

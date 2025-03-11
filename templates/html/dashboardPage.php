@@ -6,19 +6,19 @@
         <table class="w3-table">
             <tr>
                 <th>Name :</th>
-                <td><?php echo $user->getName(); ?></td>
+                <td><?php echo $user->name; ?></td>
             </tr>
             <tr>
                 <th>Firstname :</th>
-                <td><?php echo $user->getFirstname(); ?></td>
+                <td><?php echo $user->firstname; ?></td>
             </tr>
             <tr>
                 <th>Email :</th>
-                <td><?php echo $user->getEmail(); ?></td>
+                <td><?php echo $user->email; ?></td>
             </tr>
             <tr>
                 <th>Phone number :</th>
-                <td><?php echo $user->getTel(); ?></td>
+                <td><?php echo $user->tel; ?></td>
             </tr>
         </table>
 

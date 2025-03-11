@@ -1,6 +1,8 @@
 <div class="parent-middle w3-container">
     <div class="w3-card w3-margin w3-center w3-round-large w3-padding half">
-        <form method="POST" action="">
+        <form method="POST" action="" enctype="multipart/form-data">
+            <input type="hidden" name="type" id="type" value="<?php echo isset($_GET['id']) ? "true" : "false" ?>">
+            <input type="hidden" name="user_id" id="user_id" value="<?php echo $_SESSION['user_id'] ?>">
             <label for="title">
                 <p>Title</p>
                 <input type="text" name="title" placeholder="Title" required id="title"

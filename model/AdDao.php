@@ -114,4 +114,21 @@ class AdDao implements DaoInterface
         }
         return false;
     }
+
+    function selectAllByUser(int $id): ?array
+    {
+        $ads = [];
+        try {
+            $stmt = DbConnect::getDb()->prepare("SELECT * FROM \"annonce\" WHERE id_user = ?");
+            $stmt->bindValue(1, $id);
+            $stmt->execute();
+            while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+                $ads[] = new Ad($row['id_annonce'], $row['title'], $row['localisation'], $row['description'], $row['price'], $row['id_user']);
+            }
+            return $ads;
+        } catch (PDOException $e) {
+            echo $e->getMessage();
+        }
+        return null;
+    }
 }

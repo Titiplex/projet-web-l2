@@ -10,8 +10,8 @@ require_once "Image.php";
  */
 class Image extends Model
 {
-    private int $annonce_id;
-    private string $binary; // Contenu binaire de l'image (BYTEA)
+    protected int $annonce_id;
+    protected string $binary; // Contenu binaire de l'image (BYTEA)
 
     public function __construct(int $id, int $annonce_id, string $binary)
     {

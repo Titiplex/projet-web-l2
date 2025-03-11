@@ -13,16 +13,16 @@ require_once "Model.php";
  */
 class User extends Model {
 
-    private string $name;
+    protected string $name;
 
-    private  string $firstname;
-    private string $password;
+    protected  string $firstname;
+    protected string $password;
 
-    private string $email;
+    protected string $email;
 
-    private Role $role;
+    protected Role $role;
 
-    private string $tel;
+    protected string $tel;
 
     public function __construct(int $id, string $email, string $tel, string $name, string $firstname, string $password, Role $role)
     {

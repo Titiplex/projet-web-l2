@@ -7,7 +7,7 @@ namespace model;
  */
 class Role extends Model
 {
-    private string $role_name;
+    protected string $role_name;
 
     public function __construct(int $id, string $role_name) {
         parent::__construct($id);

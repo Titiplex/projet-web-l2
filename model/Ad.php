@@ -15,11 +15,11 @@ use Exception;
  */
 final class Ad extends Model
 {
-    private string $title;
-    private string $description;
-    private string $localisation;
-    private int $price;
-    private int $id_user;
+    protected string $title;
+    protected string $description;
+    protected string $localisation;
+    protected int $price;
+    protected int $id_user;
     public function __construct(int $id, string $title, string $localisation, string $description, int $price, $id_user) {
         parent::__construct($id);
         $this->title = $title;

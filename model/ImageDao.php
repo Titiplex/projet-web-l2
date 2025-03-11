@@ -2,6 +2,10 @@
 
 namespace model;
 
+require_once "Image.php";
+require_once "DbConnect.php";
+require_once "DaoInterface.php";
+
 use PDO;
 use PDOException;
 
@@ -55,7 +59,11 @@ class ImageDao implements DaoInterface
         return $images;
     }
 
-    public function insert(Image|Model $data): bool
+    /**
+     * @param Image $data
+     * @return bool
+     */
+    public function insert($data): bool
     {
         $conn = DbConnect::getDb();
         try {
@@ -74,7 +82,11 @@ class ImageDao implements DaoInterface
         return false;
     }
 
-    public function update(Image|Model $data): bool
+    /**
+     * @param Image $data
+     * @return bool
+     */
+    public function update($data): bool
     {
         $conn = DbConnect::getDb();
         try {

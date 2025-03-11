@@ -2,6 +2,8 @@
 
 namespace model;
 
+require_once "Image.php";
+
 /**
  * @property int annonce_id
  * @property string binary

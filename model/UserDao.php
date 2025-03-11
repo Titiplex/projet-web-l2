@@ -1,5 +1,10 @@
 <?php
 namespace model;
+require_once "DaoInterface.php";
+require_once "DbConnect.php";
+require_once "User.php";
+require_once "Role.php";
+require_once "RoleDao.php";
 
 use PDO;
 use PDOException;
@@ -14,11 +19,14 @@ class UserDao implements DaoInterface
             $stmt->bindValue(1, $id);
             $stmt->execute();
             $row = $stmt->fetch(PDO::FETCH_ASSOC);
+
+            if (!$row) return null;
+
             $role_id = $row['id_role'];
 
             $role = (new RoleDao())->selectById($role_id);
 
-            return $row ? new User($row['id_user'], $row['mail'], $row['tel'], $row['nom'], $row['prenom'], $row['mdp'], $role) : null;
+            return new User($row['id_user'], $row['mail'], $row['tel'], $row['nom'], $row['prenom'], $row['mdp'], $role);
         } catch (PDOException $e) {
             echo $e->getMessage();
         }
@@ -44,7 +52,11 @@ class UserDao implements DaoInterface
         return $users;
     }
 
-    public function insert(User|Model $data): bool
+    /**
+     * @param User $data
+     * @return bool
+     */
+    public function insert($data): bool
     {
         $conn = DbConnect::getDb();
         try {
@@ -67,7 +79,11 @@ class UserDao implements DaoInterface
         return false;
     }
 
-    public function update(User|Model $data): bool
+    /**
+     * @param User $data
+     * @return bool
+     */
+    public function update($data): bool
     {
         $conn = DbConnect::getDb();
         try {
@@ -113,11 +129,14 @@ class UserDao implements DaoInterface
             $stmt->bindValue(1, $email);
             $stmt->execute();
             $row = $stmt->fetch(PDO::FETCH_ASSOC);
+
+            if (!$row) return null;
+
             $role_id = $row['id_role'];
 
             $role = (new RoleDao())->selectById($role_id);
 
-            return $row ? new User($row['id_user'], $row['mail'], $row['tel'], $row['nom'], $row['prenom'], $row['mdp'], $role) : null;
+            return new User($row['id_user'], $row['mail'], $row['tel'], $row['nom'], $row['prenom'], $row['mdp'], $role);
         } catch (PDOException $e) {
             echo $e->getMessage();
         }

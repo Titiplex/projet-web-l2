@@ -2,6 +2,10 @@
 
 namespace model;
 
+require_once "Ad.php";
+require_once "DbConnect.php";
+require_once "DaoInterface.php";
+
 use PDO;
 use PDOException;
 
@@ -42,7 +46,11 @@ class AdDao implements DaoInterface
         return $ads;
     }
 
-    function insert(Ad|Model $data): bool
+    /**
+     * @param Ad $data
+     * @return bool
+     */
+    function insert($data): bool
     {
         $conn = DbConnect::getDb();
         try {
@@ -64,7 +72,11 @@ class AdDao implements DaoInterface
         return false;
     }
 
-    function update(Ad|Model $data): bool
+    /**
+     * @param Ad $data
+     * @return bool
+     */
+    function update($data): bool
     {
         $conn = DbConnect::getDb();
         try {

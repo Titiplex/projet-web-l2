@@ -2,6 +2,10 @@
 
 namespace model;
 
+require_once "DbConnect.php";
+require_once "Role.php";
+require_once "DaoInterface.php";
+
 use PDO;
 use PDOException;
 
@@ -38,7 +42,11 @@ class RoleDao implements DaoInterface
         return $roles;
     }
 
-    function insert(Role|Model $data): bool
+    /**
+     * @param Role $data
+     * @return bool
+     */
+    function insert($data): bool
     {
         $conn = DbConnect::getDb();
         try {
@@ -56,7 +64,11 @@ class RoleDao implements DaoInterface
         return false;
     }
 
-    function update(Role|Model $data): bool
+    /**
+     * @param Role $data
+     * @return bool
+     */
+    function update($data): bool
     {
         $conn = DbConnect::getDb();
         try {

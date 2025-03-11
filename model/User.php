@@ -1,7 +1,7 @@
 <?php
 namespace model;
 
-use Exception;
+require_once "Model.php";
 
 /**
  * @property string $email

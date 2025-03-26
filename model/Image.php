@@ -2,7 +2,7 @@
 
 namespace model;
 
-require_once "Image.php";
+require_once "Model.php";
 
 /**
  * @property int annonce_id
@@ -11,12 +11,12 @@ require_once "Image.php";
 class Image extends Model
 {
     protected int $annonce_id;
-    protected string $binary; // Contenu binaire de l'image (BYTEA)
+    protected string $url;
 
-    public function __construct(int $id, int $annonce_id, string $binary)
+    public function __construct(int $id, int $annonce_id, string $url)
     {
         parent::__construct($id);
         $this->annonce_id = $annonce_id;
-        $this->binary = $binary;
+        $this->url = $url;
     }
 }

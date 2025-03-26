@@ -1,22 +1,26 @@
 <?php
 
 use model\AdDao;
+use model\Image;
+use model\ImageDao;
 
 session_start();
-    $racine = '../';
-    $titre = "Welcome at LeBonTroqueur";
-    include($racine . 'templates/html/header.php');
+$racine = '../';
+$titre = "Welcome at LeBonTroqueur";
+include($racine . 'templates/html/header.php');
 
-    require_once $racine . 'model/AdDao.php';
+require_once $racine . 'model/AdDao.php';
+require_once $racine . 'model/ImageDao.php';
 
-    if (isset($_SESSION["user_id"])){
-        $ads = (new \model\AdDao())->selectAll();
-        include($racine . 'templates/html/homePageConnected.php');
-        foreach ($ads as $ad) {
-            include($racine . 'templates/html/adCard.php');
-        }
-        echo "</div></div>";
-    } else {
-        include($racine . 'templates/html/homePageNotConnected.php');
+if (isset($_SESSION["user_id"])) {
+    $ads = (new AdDao())->selectAll();
+    include($racine . 'templates/html/homePageConnected.php');
+    foreach ($ads as $ad) {
+        $images = (new ImageDao())->getByAnnonceId($ad->id);
+        include($racine . 'templates/html/adCard.php');
     }
-    include($racine . 'templates/html/footer.php');
+    echo "</div></div>";
+} else {
+    include($racine . 'templates/html/homePageNotConnected.php');
+}
+include($racine . 'templates/html/footer.php');

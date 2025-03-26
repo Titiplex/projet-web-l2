@@ -18,9 +18,6 @@ class AdDao implements DaoInterface
             $stmt->bindValue(1, $id);
             $stmt->execute();
             $row = $stmt->fetch(PDO::FETCH_ASSOC);
-            $role_id = $row['id_role'];
-
-            $role = (new RoleDao())->selectById($role_id);
 
             return $row ? new Ad($row['id_annonce'], $row['title'], $row['localisation'], $row['description'], $row['price'], $row['id_user']) : null;
         } catch (PDOException $e) {
@@ -87,7 +84,7 @@ class AdDao implements DaoInterface
             $stmt->bindValue(3, $data->localisation);
             $stmt->bindValue(4, $data->price);
             $stmt->bindValue(5, $data->id_user);
-            $stmt->bindValue(7, $data->id);
+            $stmt->bindValue(6, $data->id);
             $stmt->execute();
             $conn->commit();
             return true;

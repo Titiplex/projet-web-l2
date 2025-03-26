@@ -70,7 +70,7 @@ class ImageDao implements DaoInterface
             $conn->beginTransaction();
             $stmt = $conn->prepare("INSERT INTO annonce_image (id_annonce, image) VALUES (?, ?) RETURNING id_image");
             $stmt->bindValue(1, $data->annonce_id);
-            $stmt->bindValue(2, $data->binary);
+            $stmt->bindValue(2, $data->url);
             $stmt->execute();
             $data->id = $stmt->fetchColumn();
             $conn->commit();

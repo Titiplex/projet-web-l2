@@ -42,7 +42,30 @@ class UserDao implements DaoInterface
             while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
                 $role_id = $row['id_role'];
                 $role = (new RoleDao())->selectById($role_id);
-                $users[] = new User($row['id'], $row['mail'], $row['tel'], $row['nom'], $row['prenom'], $row['mdp'], $role);
+                $users[] = new User($row['id_user'], $row['mail'], $row['tel'], $row['nom'], $row['prenom'], $row['mdp'], $role);
+            }
+
+            return $users;
+        } catch (PDOException $e) {
+            echo $e->getMessage();
+        }
+        return $users;
+    }
+
+    /**
+     * @param $role_id
+     * @return array
+     */
+    public function selectAllByRoleId($role_id): array
+    {
+        $users = [];
+        try {
+            $stmt = DbConnect::getDb()->prepare("SELECT * FROM \"user\" WHERE id_role = ?");
+            $stmt->bindValue(1, $role_id);
+            $stmt->execute();
+            while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+                $role = (new RoleDao())->selectById($role_id);
+                $users[] = new User($row['id_user'], $row['mail'], $row['tel'], $row['nom'], $row['prenom'], $row['mdp'], $role);
             }
 
             return $users;

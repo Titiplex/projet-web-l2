@@ -2,21 +2,32 @@
     <div class="w3-twothird">
         <div class="w3-card w3-padding w3-round w3-margin">
             <div>
-                <h3>Title of the ad</h3>
-                <sub>id: 0000</sub>
+                <h3><?php echo $ad->title ?></h3>
+                <sub>ID = <?php echo $ad->id; ?></sub>
             </div>
+            <?php if ($user->id == $_SESSION['user_id']): ?>
             <div>
-                <a class="w3-button w3-red w3-margin">Delete</a>
-                <a class="w3-button w3-theme w3-margin" href="<?php echo $racine."control/adForm.php" ?>">Update</a>
+                <a class="w3-button w3-red w3-margin" href="<?php echo "deleteAd?id=".$ad->id ?>">Delete</a>
+                <a class="w3-button w3-theme w3-margin" href="<?php echo "adForm?id=".$ad->id ?>">Update</a>
             </div>
+            <?php endif; ?>
         </div>
         <div class="w3-card w3-padding w3-round w3-margin">
             <div>
-                <p>Petite description</p>
-                <p>Localisation : Adresse</p>
+                <p><?php echo $ad->description; ?></p>
+                <p>Localisation : <?php echo $ad->localisation; ?></p>
             </div>
-            <div>
-                <img alt="Image" src="<?php echo $racine."images/ads/img.png" ?>" class="w3-border-black">
+            <div class="w3-content w3-display-container">
+                <?php
+                if(!empty($images)) {
+                    foreach($images as $index) {?>
+                        <img class="mySlides" src="<?php echo $index->url; ?>" style="width:100%; <?php echo ($index == 0 ? 'display:block;' : 'display:none;'); ?>" alt="">
+                    <?php }
+                } else { ?>
+                    <img src="<?php echo 'images/default.png'; ?>" style="width:100%;" alt="">
+                <?php } ?>
+                <button class="w3-button w3-display-left" onclick="plusDivs(-1)">&#10094;</button>
+                <button class="w3-button w3-display-right" onclick="plusDivs(1)">&#10095;</button>
             </div>
         </div>
     </div>
@@ -27,20 +38,20 @@
         <div>
             <table class="w3-table">
                 <tr>
-                    <th>Name : </th>
-                    <td>Martin</td>
+                    <th>Name</th>
+                    <td><?php echo $user->name ?></td>
                 </tr>
                 <tr>
-                    <th>First Name : </th>
-                    <td>Albert</td>
+                    <th>First Name</th>
+                    <td><?php echo $user->firstname ?></td>
                 </tr>
                 <tr>
-                    <th>Email : </th>
-                    <td>Albert@gmail.com</td>
+                    <th>Email</th>
+                    <td><?php echo $user->email ?></td>
                 </tr>
                 <tr>
-                    <th>Phone : </th>
-                    <td>12345678</td>
+                    <th>Phone</th>
+                    <td><?php echo $user->tel ?></td>
                 </tr>
             </table>
         </div

@@ -20,8 +20,8 @@ if (!isset($_SESSION["user_id"])){
             $_SESSION['user_id'] = $db_user->id;
             $_SESSION['role_id'] = $db_user->role->id;
         }
-        header('Location: https://pedago.univ-avignon.fr/~uapv2401251/');
+        header('Location: index.php');
     }
 } else {
-    header('Location: https://pedago.univ-avignon.fr/~uapv2401251/');
+    header('Location: index.php');
 }

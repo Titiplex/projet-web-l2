@@ -24,15 +24,15 @@ CREATE TABLE IF NOT EXISTS Annonce
     localisation VARCHAR(255) NOT NULL,
     price        int          NOT NULL,
     ID_User      INT          NOT NULL,
-    FOREIGN KEY (ID_User) REFERENCES "user" (ID_User) ON DELETE CASCADE
+    FOREIGN KEY (ID_User) REFERENCES "user" (ID_User)
 );
 
 CREATE TABLE IF NOT EXISTS Annonce_Image
 (
     ID_Image   SERIAL PRIMARY KEY,
     ID_Annonce INT   NOT NULL,
-    image      BYTEA NOT NULL,
-    FOREIGN KEY (ID_Annonce) REFERENCES Annonce (ID_Annonce) ON DELETE CASCADE
+    image      VARCHAR(255) NOT NULL,
+    FOREIGN KEY (ID_Annonce) REFERENCES Annonce (ID_Annonce)
 );
 
 INSERT INTO role (nom_role)

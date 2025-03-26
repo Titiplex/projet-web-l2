@@ -1,0 +1,11 @@
+RewriteEngine On
+RewriteBase /~uapv2401251/
+Options -Indexes
+# Redirection externe : si quelqu'un demande control/nom.php, redirige vers /nom
+RewriteCond %{THE_REQUEST} \s/control/([^?]+)\.php[?\s] [NC]
+RewriteRule ^control/([^.]+)\.php$ /$1 [R=301,L]
+
+# Réécriture interne : pour une URL propre /nom, servir control/nom.php
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^([^/]+)/?$ control/$1.php [L]

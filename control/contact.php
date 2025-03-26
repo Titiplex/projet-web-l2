@@ -24,6 +24,6 @@ if($_SERVER['REQUEST_METHOD'] == 'POST') {
     }
 }
 
-$user = isset($_SESSION) ? (new UserDao())->selectById($_SESSION['user_id']) : null;
+//$user = isset($_SESSION) ? (new UserDao())->selectById($_SESSION['user_id']) : null;
 
 include($racine . 'templates/html/footer.php');

@@ -67,7 +67,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     if (!$result) {
         echo "Process Unsuccessful, please try again.";
     }
-   header("Location: {$racine}index.php");
+   header("Location: index.php");
 }
 
 include $racine . "templates/html/header.php";

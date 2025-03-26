@@ -18,7 +18,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $prenom = htmlspecialchars($_POST['firstname']);
     $email = htmlspecialchars($_POST['email']);
     $password = htmlspecialchars($_POST['password']);
-    $password_confirm = htmlspecialchars($_POST['password_confirmation']);
+    $password_confirm = htmlspecialchars($_POST['password-confirmation']);
     $tel = htmlspecialchars($_POST['tel']);
 
     $user_dao = new \model\UserDao();

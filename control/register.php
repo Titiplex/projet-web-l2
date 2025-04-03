@@ -1,5 +1,4 @@
 <?php
-session_start();
 $racine = '../';
 
 require_once $racine . 'model/UserDao.php';
@@ -8,12 +7,18 @@ require_once $racine . 'model/Role.php';
 
 $titre = "Sign Up to LeBonTroqueur";
 
-if (isset($_SESSION["user_id"])) header("Location: {$racine}index.php");
 include($racine . 'templates/html/header.php');
+
+if (isset($_SESSION["user_id"])) header("Location: {$racine}index.php");
 include($racine . 'templates/html/userFormPage.php');
 include($racine . 'templates/html/footer.php');
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
+
+    if (!isset($_POST['csrf_token']) || $_POST['csrf_token'] !== $_SESSION['csrf_token']) {
+        die('Erreur CSRF : token invalide.');
+    }
+    
     $nom = htmlspecialchars($_POST['name']);
     $prenom = htmlspecialchars($_POST['firstname']);
     $email = htmlspecialchars($_POST['email']);

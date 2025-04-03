@@ -1,5 +1,4 @@
 <?php
-session_start();
 $racine = "../";
 $titre = "Modify or create an ad";
 
@@ -8,12 +7,19 @@ require_once $racine . "model/Ad.php";
 require_once $racine . "model/Image.php";
 require_once $racine . "model/ImageDao.php";
 
+include $racine . "templates/html/header.php";
+
 if (!isset($_SESSION['user_id'])) header("Location: {$racine}index.php");
 
 $adDao = new \model\AdDao();
 $imageDao = new \model\ImageDao();
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+
+    if (!isset($_POST['csrf_token']) || $_POST['csrf_token'] !== $_SESSION['csrf_token']) {
+        die('Erreur CSRF : token invalide.');
+    }
+    
     $title = $_POST['title'];
     $description = $_POST['desc'];
     $location = $_POST['location'];
@@ -70,6 +76,5 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
    header("Location: index.php");
 }
 
-include $racine . "templates/html/header.php";
 include $racine . "templates/html/adFormPage.php";
 include $racine . "templates/html/footer.php";

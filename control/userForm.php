@@ -8,14 +8,20 @@ require_once $racine . "model/UserDao.php";
 
 $titre = "Modify your profile";
 
+include($racine . 'templates/html/header.php');
+
 if (!isset($_SESSION["user_id"])) header("Location: login");
 $user_dao = new UserDao();
 $user = $user_dao->selectById($_SESSION["user_id"]);
-include($racine . 'templates/html/header.php');
 include($racine . 'templates/html/userFormPage.php');
 include($racine . 'templates/html/footer.php');
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
+
+    if (!isset($_POST['csrf_token']) || $_POST['csrf_token'] !== $_SESSION['csrf_token']) {
+        die('Erreur CSRF : token invalide.');
+    }
+    
     $nom = htmlspecialchars($_POST['name']);
     $prenom = htmlspecialchars($_POST['firstname']);
     $email = htmlspecialchars($_POST['email']);

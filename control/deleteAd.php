@@ -19,5 +19,5 @@ if (isset($_GET['id'])) {
         }
         if ($addao -> delete($id)) error_log("erreur suppression annonce ".$id);
     }
-    header("location: https://pedago.univ-avignon.fr/~uapv2401251/index.php");
+    header("location: index.php");
 }

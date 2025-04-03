@@ -4,7 +4,6 @@ use model\AdDao;
 use model\Image;
 use model\ImageDao;
 
-session_start();
 $racine = '../';
 $titre = "Welcome at LeBonTroqueur";
 include($racine . 'templates/html/header.php');

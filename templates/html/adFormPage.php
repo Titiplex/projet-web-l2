@@ -9,6 +9,7 @@ if (isset($_GET['id'])) {
         <form method="POST" action="" enctype="multipart/form-data">
             <input type="hidden" name="ad_id" id="ad_id" value="<?php echo $_GET['id'] ?? 0 ?>">
             <input type="hidden" name="user_id" id="user_id" value="<?php echo $_SESSION['user_id'] ?>">
+            <input type="hidden" name="csrf_token" value="<?php echo htmlspecialchars($_SESSION['csrf_token']); ?>">
             <label for="title">
                 <p>Title</p>
                 <input type="text" name="title" placeholder="Title" required id="title"

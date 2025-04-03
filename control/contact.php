@@ -1,5 +1,4 @@
 <?php
-session_start();
 $racine = '../';
 $titre = "Contact us !";
 
@@ -11,6 +10,11 @@ include($racine . 'templates/html/header.php');
 include($racine . 'templates/html/contactPage.php');
 
 if($_SERVER['REQUEST_METHOD'] == 'POST') {
+
+    if (!isset($_POST['csrf_token']) || $_POST['csrf_token'] !== $_SESSION['csrf_token']) {
+        die('Erreur CSRF : token invalide.');
+    }
+    
     $email = $_POST['email'];
     $message = wordwrap($_POST['message'], 70);
     $object = $_POST['object'];

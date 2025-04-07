@@ -3,7 +3,6 @@
 use model\ImageDao;
 use model\UserDao;
 
-session_start();
 $racine = '../';
 
 require_once $racine."model/UserDao.php";

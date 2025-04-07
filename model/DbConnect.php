@@ -5,15 +5,23 @@ namespace model;
 use PDO;
 use PDOException;
 
+/**
+ * @DbConnect allows you to create or get a connection to the database.
+ */
 class DbConnect
 {
     private static ?PDO $conn = null;
 
+    /**
+     * Loads the environment variables necessary for the connection.
+     * Those variables come from the .env file at the root of the project.
+     * @return void
+     */
     private static function loadEnv(): void
     {
         $filePath = dirname(__DIR__) . '/.env';
         if (!file_exists($filePath)) {
-            die("Erreur : Fichier .env introuvable !");
+            die("Error : cannot find .env file !");
         }
 
         $lines = file($filePath, FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES);
@@ -32,6 +40,10 @@ class DbConnect
         }
     }
 
+    /**
+     * Allows creating a connection to the database, or return an already existing connection.
+     * @return PDO|null the connection to the database or null if connection cannot be established.
+     */
     public static function getDb(): ?PDO
     {
         if (self::$conn == null) {
@@ -56,6 +68,3 @@ class DbConnect
         return self::$conn;
     }
 }
-// config.php → les infos de connection
-// créer classe qui fait lien entre vos objets et vos tables
-// vérifier les transactions

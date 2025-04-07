@@ -1,4 +1,9 @@
 <?php
+
+/**
+ * Creates the contact page (to send mail to the website's admins).
+ */
+
 $racine = '../';
 $titre = "Contact us !";
 

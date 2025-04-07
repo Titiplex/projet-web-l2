@@ -1,4 +1,9 @@
 <?php
+
+/**
+ * Creates the advertisement creation/modification form page.
+ */
+
 $racine = "../";
 $titre = "Modify or create an ad";
 

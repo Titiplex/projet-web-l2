@@ -1,6 +1,10 @@
 <?php
 $racine = '../';
 
+/**
+ * Creates the sign-up page.
+ */
+
 require_once $racine . 'model/UserDao.php';
 require_once $racine . 'model/User.php';
 require_once $racine . 'model/Role.php';

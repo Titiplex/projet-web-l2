@@ -9,8 +9,14 @@ require_once "DaoInterface.php";
 use PDO;
 use PDOException;
 
+/**
+ * Data access object in the database for roles.
+ */
 class RoleDao implements DaoInterface
 {
+    /**
+     * @return Role|null the selected role or null if not found
+     */
     function selectById(int $id): ?Role
     {
         try {
@@ -26,6 +32,9 @@ class RoleDao implements DaoInterface
         return null;
     }
 
+    /**
+     * @return array an array containing all the existing selected roles.
+     */
     function selectAll(): array
     {
         $roles = [];
@@ -43,8 +52,8 @@ class RoleDao implements DaoInterface
     }
 
     /**
-     * @param Role $data
-     * @return bool
+     * @param Role|Model $data the role to create in the db, of Model descent.
+     * @return bool indicates if the insertion was successful (true) or not (false).
      */
     function insert($data): bool
     {
@@ -65,10 +74,11 @@ class RoleDao implements DaoInterface
     }
 
     /**
-     * @param Role $data
-     * @return bool
+     * @param Role|Model $data the already updated role corresponding to the role to update in the db.
+     * Thus, be careful to have matching id's.
+     * @return bool indicates if the insertion was successful (true) or not (false).
      */
-    function update($data): bool
+    function update(Role|Model $data): bool
     {
         $conn = DbConnect::getDb();
         try {
@@ -86,6 +96,9 @@ class RoleDao implements DaoInterface
         return false;
     }
 
+    /**
+     * @return bool indicates if the insertion was successful (true) or not (false).
+     */
     function delete(int $id): bool
     {
         $conn = DbConnect::getDb();

@@ -9,8 +9,14 @@ require_once "DaoInterface.php";
 use PDO;
 use PDOException;
 
+/**
+ * Data access object in the database for images.
+ */
 class ImageDao implements DaoInterface
 {
+    /**
+     * @return Image|null the selected image or null if not found
+     */
     public function selectById(int $id): ?Image
     {
         try {
@@ -26,6 +32,12 @@ class ImageDao implements DaoInterface
         return null;
     }
 
+    /**
+     * Selects one or multiple images from the unique id of its associated advertisement.
+     *
+     * @param int $annonceId the unique id of the advertisement.
+     * @return array contains all selected images.
+     */
     public function getByAnnonceId(int $annonceId): array
     {
         $images = [];
@@ -35,7 +47,7 @@ class ImageDao implements DaoInterface
             $stmt->execute();
 
             while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
-                $images[] = new Image($row['id_image'],$annonceId, $row['image']);
+                $images[] = new Image($row['id_image'], $annonceId, $row['image']);
             }
         } catch (PDOException $e) {
             echo $e->getMessage();
@@ -44,6 +56,9 @@ class ImageDao implements DaoInterface
         return $images;
     }
 
+    /**
+     * @return array an array containing all the existing selected images.
+     */
     public function selectAll(): array
     {
         $images = [];
@@ -60,10 +75,10 @@ class ImageDao implements DaoInterface
     }
 
     /**
-     * @param Image $data
-     * @return bool
+     * @param Image|Model $data the image to create in the db, of Model descent.
+     * @return bool indicates if the insertion was successful (true) or not (false).
      */
-    public function insert($data): bool
+    public function insert(Image|Model $data): bool
     {
         $conn = DbConnect::getDb();
         try {
@@ -83,16 +98,17 @@ class ImageDao implements DaoInterface
     }
 
     /**
-     * @param Image $data
-     * @return bool
+     * @param Image|Model $data the already updated image corresponding to the image to update in the db.
+     * Thus, be careful to have matching id's.
+     * @return bool indicates if the insertion was successful (true) or not (false).
      */
-    public function update($data): bool
+    public function update(Image|Model $data): bool
     {
         $conn = DbConnect::getDb();
         try {
             $conn->beginTransaction();
             $stmt = $conn->prepare("UPDATE annonce_image SET image = ?, id_annonce = ? WHERE id_image = ?");
-            $stmt->bindValue(1, $data->binary);
+            $stmt->bindValue(1, $data->url);
             $stmt->bindValue(2, $data->annonce_id);
             $stmt->bindValue(3, $data->id);
             $stmt->execute();
@@ -105,6 +121,9 @@ class ImageDao implements DaoInterface
         return false;
     }
 
+    /**
+     * @return bool indicates if the insertion was successful (true) or not (false).
+     */
     public function delete(int $id): bool
     {
         $conn = DbConnect::getDb();

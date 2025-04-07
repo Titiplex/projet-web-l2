@@ -9,8 +9,14 @@ require_once "DaoInterface.php";
 use PDO;
 use PDOException;
 
+/**
+ * Data access object in the database for advertisements.
+ */
 class AdDao implements DaoInterface
 {
+    /**
+     * @return Ad|null the selected advertisement or null if not found
+     */
     function selectById(int $id): ?Ad
     {
         try {
@@ -26,6 +32,9 @@ class AdDao implements DaoInterface
         return null;
     }
 
+    /**
+     * @return array an array containing all the existing selected advertisements.
+     */
     function selectAll(): array
     {
         $ads = [];
@@ -44,10 +53,10 @@ class AdDao implements DaoInterface
     }
 
     /**
-     * @param Ad $data
-     * @return bool
+     * @param Ad|Model $data the advertisement to create in the db, of Model descent.
+     * @return bool indicates if the insertion was successful (true) or not (false).
      */
-    function insert($data): bool
+    function insert(Ad|Model $data): bool
     {
         $conn = DbConnect::getDb();
         try {
@@ -70,8 +79,9 @@ class AdDao implements DaoInterface
     }
 
     /**
-     * @param Ad $data
-     * @return bool
+     * @param Ad|Model $data the already updated advertisement corresponding to the advertisement to update in the db.
+     * Thus, be careful to have matching id's.
+     * @return bool indicates if the insertion was successful (true) or not (false).
      */
     function update($data): bool
     {
@@ -95,6 +105,9 @@ class AdDao implements DaoInterface
         return false;
     }
 
+    /**
+     * @return bool indicates if the insertion was successful (true) or not (false).
+     */
     function delete(int $id): bool
     {
         $conn = DbConnect::getDb();
@@ -112,6 +125,12 @@ class AdDao implements DaoInterface
         return false;
     }
 
+    /**
+     * Selects all advertisements produced by a specified user.
+     * 
+     * @param int $id the unique id of the user.
+     * @return array|null an array containing all advertisements for the user, null if the user does not have any advertisement.
+     */
     function selectAllByUser(int $id): ?array
     {
         $ads = [];

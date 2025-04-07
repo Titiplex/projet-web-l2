@@ -1,4 +1,9 @@
 <?php
+
+/**
+ * Creates the cookie-settings page (to choose the cookies you want).
+ */
+
 $racine = "../";
 $titre = "Cookies";
 

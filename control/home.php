@@ -1,10 +1,16 @@
 <?php
-
+$racine = '../';
+require_once $racine . 'model/AdDao.php';
+require_once $racine . 'model/Image.php';
+require_once $racine . 'model/ImageDao.php';
 use model\AdDao;
 use model\Image;
 use model\ImageDao;
 
-$racine = '../';
+/**
+ * Creates the home page.
+ */
+
 $titre = "Welcome at LeBonTroqueur";
 include($racine . 'templates/html/header.php');
 

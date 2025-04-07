@@ -9,9 +9,14 @@ require_once "RoleDao.php";
 use PDO;
 use PDOException;
 
+/**
+ * Data access object in the database for users.
+ */
 class UserDao implements DaoInterface
 {
-
+    /**
+     * @return User|null the selected user or null if not found
+     */
     public function selectById(int $id): ?User
     {
         try {
@@ -33,6 +38,9 @@ class UserDao implements DaoInterface
         return null;
     }
 
+    /**
+     * @return array an array containing all the existing selected users.
+     */
     public function selectAll(): array
     {
         $users = [];
@@ -53,10 +61,12 @@ class UserDao implements DaoInterface
     }
 
     /**
-     * @param $role_id
-     * @return array
+     * Selects all users that have been assigned a designate role.
+     * 
+     * @param int $role_id the id of the role searched for.
+     * @return array contains all found users.
      */
-    public function selectAllByRoleId($role_id): array
+    public function selectAllByRoleId(int $role_id): array
     {
         $users = [];
         try {
@@ -76,10 +86,10 @@ class UserDao implements DaoInterface
     }
 
     /**
-     * @param User $data
-     * @return bool
+     * @param User|Model $data the user to create in the db, of Model descent.
+     * @return bool indicates if the insertion was successful (true) or not (false).
      */
-    public function insert($data): bool
+    public function insert(User|Model $data): bool
     {
         $conn = DbConnect::getDb();
         try {
@@ -103,10 +113,11 @@ class UserDao implements DaoInterface
     }
 
     /**
-     * @param User $data
-     * @return bool
+     * @param User|Model $data the already updated user corresponding to the user to update in the db.
+     * Thus, be careful to have matching id's.
+     * @return bool indicates if the insertion was successful (true) or not (false).
      */
-    public function update($data): bool
+    public function update(User|Model $data): bool
     {
         $conn = DbConnect::getDb();
         try {
@@ -129,6 +140,9 @@ class UserDao implements DaoInterface
         return false;
     }
 
+    /**
+     * @return bool indicates if the insertion was successful (true) or not (false).
+     */
     public function delete(int $id): bool
     {
         $conn = DbConnect::getDb();
@@ -146,6 +160,12 @@ class UserDao implements DaoInterface
         return false;
     }
 
+    /**
+     * Finds a user in the db according to its email.
+     * 
+     * @param string $email the email of the searched user.
+     * @return User|null the corresponding user, or null if not found.
+     */
     public function getByEmail(string $email) : ?User {
         try {
             $stmt = DbConnect::getDb()->prepare("SELECT * FROM \"user\" WHERE mail = ?");

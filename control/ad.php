@@ -4,6 +4,10 @@ use model\UserDao;
 use model\AdDao;
 use model\ImageDao;
 
+/**
+ * Creates the advertisement page.
+ */
+
 $racine = '../';
 $titre = "Product page : ";
 

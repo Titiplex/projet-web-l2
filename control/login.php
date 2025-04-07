@@ -1,10 +1,13 @@
 <?php
 
-namespace model;
+/**
+ * Creates the login page.
+ */
 
 $racine = '../';
 require_once $racine."model/UserDao.php";
 $titre = "Log in LeBonTroqueur";
+use model\UserDao;
 
 include($racine . 'templates/html/header.php');
 

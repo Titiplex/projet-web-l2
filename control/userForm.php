@@ -2,6 +2,10 @@
 session_start();
 $racine = "../";
 
+/**
+ * Creates the user profil modification form page.
+ */
+
 use  \model\UserDao;
 
 require_once $racine . "model/UserDao.php";

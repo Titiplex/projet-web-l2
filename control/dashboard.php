@@ -3,6 +3,10 @@
 use model\ImageDao;
 use model\UserDao;
 
+/**
+ * Creates the user's dashboard page.
+ */
+
 $racine = '../';
 
 require_once $racine."model/UserDao.php";

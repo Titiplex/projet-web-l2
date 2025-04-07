@@ -3,6 +3,10 @@ session_start();
 use model\AdDao;
 use model\ImageDao;
 
+/**
+ * Php control file to delete an advertisement.
+ */
+
 $racine = "../";
 require_once $racine."model/AdDao.php";
 require_once $racine."model/ImageDao.php";
